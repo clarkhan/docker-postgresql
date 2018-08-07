@@ -1,11 +1,10 @@
 FROM ubuntu:bionic-20180526 AS add-apt-repositories
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl net-tools vim gnupg \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y gnupg \
  && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
  && echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' >> /etc/apt/sources.list \
- && sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
- && apt-get install curl net-tools
+ && sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 FROM ubuntu:bionic-20180526
 
@@ -34,6 +33,9 @@ RUN apt-get update \
  && ln -sf ${PG_DATADIR}/pg_ident.conf /etc/postgresql/${PG_VERSION}/main/pg_ident.conf \
  && rm -rf ${PG_HOME} \
  && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl net-tools vim \
 
 COPY runtime/ ${PG_APP_HOME}/
 
