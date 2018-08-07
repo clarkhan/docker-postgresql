@@ -35,7 +35,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl net-tools vim \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl net-tools vim
 
 COPY runtime/ ${PG_APP_HOME}/
 
