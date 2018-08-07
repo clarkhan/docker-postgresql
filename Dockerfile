@@ -34,8 +34,7 @@ RUN apt-get update \
  && rm -rf ${PG_HOME} \
  && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl net-tools vim
+RUN apt-get update &&  DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql-9.4 postgresql-client-9.4
 
 COPY runtime/ ${PG_APP_HOME}/
 
